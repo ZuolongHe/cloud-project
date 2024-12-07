@@ -13,7 +13,7 @@ spring:
       server-addr: localhost:8848
       discovery:
         cluster-name: BeiJing
-        namespace: 10604e26-294a-47ed-8d76-ab028500ffb7 # id
+#        namespace: 10604e26-294a-47ed-8d76-ab028500ffb7 # id
 
 mybatis:
   type-aliases-package: cn.itcast.user.pojo
@@ -35,6 +35,14 @@ ribbon:
     enabled: true
     clients: # 指定加载的服务
       - userservice
+
+# 定义feign日志
+feign:
+  client:
+    config:
+      userservice:
+        loggerLevel: BASIC
+
 #feign:
 #  httpclient:
 #    max-connections: 200
