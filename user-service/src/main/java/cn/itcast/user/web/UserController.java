@@ -45,8 +45,9 @@ public class UserController {
      * @return 用户
      */
     @GetMapping("/{id}")
-    public User queryById(@PathVariable("id") Long id, @RequestHeader(value = "X-Request-red", required = false) String truth) {
+    public User queryById(@PathVariable("id") Long id, @RequestParam String authorization, @RequestHeader(value = "X-Request-red", required = false) String truth) {
         System.out.println("red:" + truth);
+        log.info("查询参数{}", authorization);
         return userService.queryById(id);
     }
 }

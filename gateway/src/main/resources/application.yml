@@ -11,26 +11,28 @@ spring:
         - id: user-service  # 路由id
           uri: lb://userservice # 路由目标地址，lb负载均衡，后面是服务名称
           predicates: # 路由断言，判断请求是否符合路由规则条件
-            - Path=/user/**
-          filters:
-            - AddRequestHeader=X-Request-red, blue
+            - Path=/user/**    # - Header=X-Request-Id, \d+ 要求请求头为X-Request-Id，且值为一个或多个数字; - Cookie=chocolate, 请求必须包含一个名为 chocolate 的Cookie，且该Cookie的值为chocolate
+#          filters:
+#            - AddRequestHeader=X-Request-red, blue
         - id: order-service
           uri: lb://orderservice
           predicates:
             - Path=/order/**
-      globalcors: # 全局的跨域处理
-        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: # 允许哪些网站的跨域请求
-              - "http://localhost:8090"
-              - "http://www.leyou.com"
-            allowedMethods: # 允许的跨域ajax的请求方式
-              - "GET"
-              - "POST"
-              - "DELETE"
-              - "PUT"
-              - "OPTIONS"
-            allowedHeaders: "*" # 允许在请求中携带的头信息
-            allowCredentials: true # 是否允许携带cookie
-            maxAge: 360000 # 这次跨域检测的有效期
+      default-filters:
+        - AddRequestHeader=X-Request-red, blue  # 全局过滤器，对所有服务都生效
+#      globalcors: # 全局的跨域处理
+#        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: # 允许哪些网站的跨域请求
+#              - "http://localhost:8090"
+#              - "http://www.leyou.com"
+#            allowedMethods: # 允许的跨域ajax的请求方式
+#              - "GET"
+#              - "POST"
+#              - "DELETE"
+#              - "PUT"
+#              - "OPTIONS"
+#            allowedHeaders: "*" # 允许在请求中携带的头信息
+#            allowCredentials: true # 是否允许携带cookie
+#            maxAge: 360000 # 这次跨域检测的有效期

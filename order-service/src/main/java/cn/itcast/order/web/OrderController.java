@@ -1,6 +1,5 @@
 package cn.itcast.order.web;
 
-import cn.itcast.order.clients.UserClient;
 import cn.itcast.order.pojo.Order;
 import cn.itcast.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
